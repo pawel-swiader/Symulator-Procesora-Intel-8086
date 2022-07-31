@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pliki/sieses.css">
+    <script src="pliki/skrypt.js"></script> 
+    <title>Procesor 8086</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+<div id="container">
+
+        <div id="header">
+            <p>Symulator procesora Intel 8086</p>
+        </div>
+        
+        <div id="high">
+            
+            <div class="wpisy">
+                <p>AH</p>
+                <input type="text" id="ah1" maxlength="2" oninput="funkcja(1, 'h')">
+                
+            </div>
+
+            <div class="wpisy">
+                <p>BH</p>
+                <input type="text" id="ah2" maxlength="2" oninput="funkcja(2, 'h')">
+                
+            </div>
+
+            <div class="wpisy">
+                <p>CH</p>
+                <input type="text" id="ah3" maxlength="2" oninput="funkcja(3, 'h')">
+                
+            </div>
+
+            <div class="wpisy">
+                <p>DH</p>
+                <input type="text" id="ah4" maxlength="2" oninput="funkcja(4, 'h')">
+                
+            </div>
+
+        </div>
+
+
+        <div id="low">
+            <div class="wpisy">
+                <p>AL</p>
+                <input type="text" id="al1" maxlength="2" oninput="funkcja(1, 'l')">
+                
+            </div>
+
+            <div class="wpisy">
+                <p>BL</p>
+                <input type="text" id="al2" maxlength="2" oninput="funkcja(2, 'l')">
+                
+            </div>
+
+            <div class="wpisy">
+                <p>CL</p>
+                <input type="text" id="al3" maxlength="2" oninput="funkcja(3, 'l')">
+                
+            </div>
+
+            <div class="wpisy">
+                <p>DL</p>
+                <input type="text" id="al4" maxlength="2" oninput="funkcja(4, 'l')">
+                
+            </div>
+
+
+
+        </div>
+
+        
+        <div id="rejestry">
+            <div class="ax">
+                
+                <span>AX</span>
+                <div class="dane">
+                    
+                    <span id="hxv1">00</span>
+                    <span id="lxv1">00</span>
+                </div>
+            </div>
+
+            <div class="ax">
+
+                <span>BX</span>
+                <div class="dane">
+                    
+                    <span id="hxv2">00</span>
+                    <span id="lxv2">00</span>
+                </div>
+            </div>
+
+            <div class="ax">
+                
+                 <span>CX</span>
+                <div class="dane">
+                   
+                    <span id="hxv3">00</span>
+                    <span id="lxv3">00</span>
+                </div>
+            </div>
+
+            <div class="ax">
+                
+                <span>DX</span>
+                <div class="dane">
+                    
+                    <span id="hxv4">00</span>
+                    <span id="lxv4">00</span>
+                </div>
+            </div>
+
+            
+        </div>
+
+
+
+
+
+        <div id="rozkazy">
+            <div id="r1">
+                <button class="rozkaz1" onclick="mov()"><b>MOV</b></button>
+                <button class="rozkaz1" onclick="xchg()"><b>XCHG</b></button>
+            </div>
+            <div id="r2">
+                <button class="rozkaz2" onclick="clr()">zerowanie</button>
+                <button class="rozkaz2" onclick="randomize()">random</button>
+            </div>
+
+        </div>
+    
+
+
+
+<!-- --------------------------------------------------- -->
+
+
+
+    <div id="part2">
+        
+        
+            <div id="fullInner1" class="fullInner">
+                <p>Pierwszy rejestr</p>
+                <hr>
+                <input type="radio" id="ax1" class="xradio" name="xradio" value="1x1">
+                <label>AX</label><br>
+                <input type="radio" id="bx1" class="xradio" name="xradio" value="2x1">
+                <label>BX</label><br>
+                <input type="radio" id="cx1" class="xradio" name="xradio" value="3x1">
+                <label>CX</label><br>
+                <input type="radio" id="dx1" class="xradio" name="xradio" value="4x1">
+                <label>DX</label><br>
+            </div>
+            
+            <div id="fullInner2" class="fullInner">
+                <p>Drugi rejestr</p>
+                <hr>
+                <input type="radio" id="ax2" class="xradio" name="xradio2" value="1x2">
+                <label>AX</label><br>
+                <input type="radio" id="bx2" class="xradio" name="xradio2" value="2x2">
+                <label>BX</label><br>
+                <input type="radio" id="cx2" class="xradio" name="xradio2" value="3x2">
+                <label>CX</label><br>
+                <input type="radio" id="dx2" class="xradio" name="xradio2" value="4x2">
+                <label>DX</label><br>                
+            </div>
+       
+        
+        
+
+            <div id="partialInner1" class="partialInner">
+                
+                <p>Pierwszy rejestr - HIGH</p>
+                <hr>
+                <input type="radio" id="ah1" class="xradio" name="xradio" value="1h1">
+                <label>AH</label><br>
+                <input type="radio" id="bh1" class="xradio" name="xradio" value="2h1">
+                <label>BH</label><br>
+                <input type="radio" id="ch1" class="xradio" name="xradio" value="3h1">
+                <label>CH</label><br>
+                <input type="radio" id="dh1" class="xradio" name="xradio" value="4h1">
+                <label>DH</label><br>
+            </div>
+            
+            <div id="partialInner2" class="partialInner">
+                
+                <p>Pierwszy rejestr - LOW</p>
+                <hr>
+                <input type="radio" id="al1" class="xradio" name="xradio" value="1l1">
+                <label>AL</label><br>
+                <input type="radio" id="bl1" class="xradio" name="xradio" value="2l1">
+                <label>BL</label><br>
+                <input type="radio" id="cl1" class="xradio" name="xradio" value="3l1">
+                <label>CL</label><br>
+                <input type="radio" id="dl1" class="xradio" name="xradio" value="4l1">
+                <label>DL</label><br>
+            </div>
+            
+            <div id="partialInner3" class="partialInner">
+                
+                <p>Drugi rejestr - HIGH</p>
+                <hr>
+                <input type="radio" id="ah2" class="xradio" name="xradio2" value="1h2">
+                <label>AH</label><br>
+                <input type="radio" id="bh2" class="xradio" name="xradio2" value="2h2">
+                <label>BH</label><br>
+                <input type="radio" id="ch2" class="xradio" name="xradio2" value="3h2">
+                <label>CH</label><br>
+                <input type="radio" id="dh2" class="xradio" name="xradio2" value="4h2">
+                <label>DH</label><br>
+            </div>
+            
+            <div id="partialInner4" class="partialInner">
+                
+                <p>Drugi rejestr - LOW</p>
+                <hr>
+                <input type="radio" id="al2" class="xradio" name="xradio2" value="1l2">
+                <label>AL</label><br>
+                <input type="radio" id="bl2" class="xradio" name="xradio2" value="2l2">
+                <label>BL</label><br>
+                <input type="radio" id="cl2" class="xradio" name="xradio2" value="3l2">
+                <label>CL</label><br>
+                <input type="radio" id="dl2" class="xradio" name="xradio2" value="4l2">
+                <label>DL</label><br>
+            </div>
+        
+
+        
+
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
